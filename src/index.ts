@@ -2,8 +2,9 @@ import { ImageRun, Paragraph, PatchType, patchDocument } from 'docx';
 import express, { Request, Response } from 'express';
 import 'dotenv/config';
 const fs = require('fs');
-const path = require('path');
+import path from 'path';
 import process from 'process';
+import { pdfReportGenerator } from './routes/pdfReportGenerator';
 
 const app = express();
 
@@ -55,12 +56,7 @@ app.get(
   }
 );
 
-app.post(
-  '/',
-  async (req: Request<{}, {}, { rowIds: string[] }>, res: Response) => {
-    res.sendFile(path.join(__dirname, 'temp/asd.docx'));
-  }
-);
+app.post('/', pdfReportGenerator);
 
 const port = Number(process.env.PORT) || 8000;
 const ip = process.env.IP || '';
