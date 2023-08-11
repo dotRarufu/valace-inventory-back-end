@@ -1,21 +1,11 @@
 import { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import {
-  Document,
-  HeadingLevel,
-  Packer,
-  Paragraph,
-  Table,
-  TableCell,
-  TableRow,
-  VerticalAlign,
-  TextDirection,
-} from 'docx';
+
 import PDFDocument from 'pdfkit';
 import blobStream from 'blob-stream';
 import PdfMake from 'pdfmake';
-import { TDocumentDefinitions, TFontDictionary } from 'pdfmake/interfaces';
+import { TDocumentDefinitions, TFontDictionary } from 'pdfmake/interfaces.js';
 
 export const pdfReportGenerator = async (
   req: Request<{}, {}, { rowIds: string[] }>,
