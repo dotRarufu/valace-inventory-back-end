@@ -11,10 +11,7 @@ export const downloadImage = async (
 
   const filePath = path.join(savePath, filename);
 
-  fs.writeFile(filePath, response.data, (err: unknown) => {
-    if (err) throw err;
-    console.log(`Image ${filename} downloaded successfully!`);
-  });
-
+  fs.writeFileSync(filePath, response.data);
+  console.log('filePath:', filePath);
   return filePath;
 };
