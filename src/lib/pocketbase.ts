@@ -1,6 +1,6 @@
 // const PocketBase = require('pocketbase/cjs');
 import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://172.18.0.1:8090');
+const pb = new PocketBase(process.env.POCKETBASE_ADDRESS);
 // todo: turned off, becausae of duplicate renders in dev mode
 pb.autoCancellation(false);
 

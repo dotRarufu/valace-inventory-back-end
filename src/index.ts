@@ -9,12 +9,33 @@ import { Collections, ItemRecord, ItemResponse } from '../pocketbase-types.js';
 import { downloadImage } from './utils/downloadImage.js';
 import cors from 'cors';
 import { cutoutGenerator } from './routes/cutoutGenerator.js';
+import fsPromises from 'fs/promises';
+import mime from 'mime';
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-app.get('/', cutoutGenerator);
+// Routes
+app.post('/cutout', cutoutGenerator);
+
+app.get(
+  '/cutout/:requestId',
+  (req: Request<{ requestId: string }>, res: Response) => {
+    const { requestId } = req.params;
+    const streamingPath = path.join(process.cwd(), 'cutouts', `${requestId}`);
+
+    res.download(streamingPath, err => {
+      if (err) {
+        console.log('Could not send file:', err);
+      }
+      fsPromises.unlink(path.join('cutouts', requestId));
+    });
+
+    // todo: handle non existing files
+  }
+);
 
 app.post('/', pdfReportGenerator);
 
@@ -25,6 +46,17 @@ const authData = pb.admins
 
 const port = Number(process.env.PORT) || 8000;
 const ip = process.env.IP || '';
+
+const filePath = path.join(process.cwd(), 'temp');
+const permissions = 0o644; // Octal representation of desired permissions
+
+fs.chmod(filePath, permissions, err => {
+  if (err) {
+    console.error('Error changing permissions:', err);
+  } else {
+    console.log('Permissions changed successfully');
+  }
+});
 
 if (process.env.NODE_ENV === 'PROD') {
   app.listen(port, ip, () => {

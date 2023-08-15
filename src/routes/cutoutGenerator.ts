@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import fsPromises from 'fs/promises';
+import { fileURLToPath } from 'url';
 import PDFDocument from 'pdfkit';
 import blobStream from 'blob-stream';
 import PdfMake from 'pdfmake';
@@ -14,40 +14,9 @@ import {
 import { Collections, ItemResponse } from '../../pocketbase-types.js';
 import pb from '../lib/pocketbase.js';
 import { downloadImage } from '../utils/downloadImage.js';
-
-const separateArray = <T>(arr: T[], chunkSize: number): (T | string)[][] => {
-  const result: (T | string)[][] = [];
-
-  for (let i = 0; i < arr.length; i += chunkSize) {
-    result.push(arr.slice(i, i + chunkSize));
-  }
-
-  const lastSubArray = result[result.length - 1];
-  if (lastSubArray.length < chunkSize) {
-    const diff = chunkSize - lastSubArray.length;
-    for (let i = 0; i < diff; i++) {
-      lastSubArray.push('');
-    }
-  }
-
-  return result;
-};
-
-const deleteAllFilesInDir = async (dirPath: string) => {
-  try {
-    const files = await fsPromises.readdir(dirPath);
-
-    const deleteFilePromises = files.map(file =>
-      fsPromises.unlink(path.join(dirPath, file))
-    );
-
-    await Promise.all(deleteFilePromises);
-
-    console.log('temp folder files deleted');
-  } catch (err) {
-    console.log('could not delete files in ' + dirPath + ': ' + err);
-  }
-};
+import { deleteAllFilesInDir } from '../utils/deleteAllFilesInDir.js';
+import { separateArray } from '../utils/separateArray.js';
+import { v4 as uuidv4 } from 'uuid';
 
 export const cutoutGenerator = async (
   req: Request<{}, {}, { items: { id: string; amount: number }[] }>,
@@ -55,6 +24,7 @@ export const cutoutGenerator = async (
 ) => {
   try {
     const { items } = req.body;
+
     const height = 250;
     const width = 250;
     const reqs = items.map(async ({ id }) => {
@@ -103,7 +73,6 @@ export const cutoutGenerator = async (
       };
     });
 
-    // todo: display product name in header
     const docDefinition: TDocumentDefinitions = {
       pageMargins: [0, 0, 0, 0],
       content: [...tables],
@@ -116,13 +85,16 @@ export const cutoutGenerator = async (
         bolditalics: 'fonts/Roboto-MediumItalic.ttf',
       },
     };
+
     const printer = new PdfMake(fonts);
     const doc = printer.createPdfKitDocument(docDefinition);
-
-    doc.pipe(fs.createWriteStream('pdfs/tables.pdf'));
+    const requestId = uuidv4();
+    const filePath = path.join('cutouts', `${requestId}.pdf`);
+    doc.pipe(fs.createWriteStream(filePath));
     doc.end();
+    console.log('filePath:', filePath);
     deleteAllFilesInDir('temp');
-    res.status(200).send('yes');
+    res.status(200).send(requestId);
   } catch (err) {
     console.log('cutout generator erred:', err);
     res.status(500).send(err);
