@@ -13,6 +13,8 @@
   "author": "Ralph Coleco",
   "license": "ISC",
   "dependencies": {
+    "@aternus/csv-to-xlsx": "^2.1.2",
+    "@json2csv/plainjs": "^7.0.3",
     "@types/blob-stream": "^0.1.30",
     "@types/mime": "^3.0.1",
     "@types/pdfkit": "^0.12.10",

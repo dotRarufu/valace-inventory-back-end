@@ -5,12 +5,10 @@ import path from 'path';
 import process from 'process';
 import { pdfReportGenerator } from './routes/pdfReportGenerator.js';
 import pb from './lib/pocketbase.js';
-import { Collections, ItemRecord, ItemResponse } from '../pocketbase-types.js';
-import { downloadImage } from './utils/downloadImage.js';
 import cors from 'cors';
 import { cutoutGenerator } from './routes/cutoutGenerator.js';
 import fsPromises from 'fs/promises';
-import mime from 'mime';
+import { exportToXlsx } from './routes/exportToXlsx.js';
 
 const app = express();
 
@@ -19,7 +17,7 @@ app.use(express.json());
 
 // Routes
 app.post('/cutout', cutoutGenerator);
-
+app.post('/to-xlsx', exportToXlsx);
 app.get(
   '/cutout/:requestId',
   (req: Request<{ requestId: string }>, res: Response) => {
@@ -31,6 +29,22 @@ app.get(
         console.log('Could not send file:', err);
       }
       fsPromises.unlink(path.join('cutouts', requestId));
+    });
+
+    // todo: handle non existing files
+  }
+);
+app.get(
+  '/to-xlsx/:requestId',
+  (req: Request<{ requestId: string }>, res: Response) => {
+    const { requestId } = req.params;
+    const streamingPath = path.join(process.cwd(), 'xlsx', `${requestId}`);
+
+    res.download(streamingPath, err => {
+      if (err) {
+        console.log('Could not send file:', err);
+      }
+      fsPromises.unlink(path.join('xlsx', requestId));
     });
 
     // todo: handle non existing files
