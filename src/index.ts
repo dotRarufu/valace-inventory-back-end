@@ -9,6 +9,7 @@ import cors from 'cors';
 import { cutoutGenerator } from './routes/cutoutGenerator.js';
 import fsPromises from 'fs/promises';
 import { exportToXlsx } from './routes/exportToXlsx.js';
+import { generateSupplyForm } from './routes/spreadsheet.js';
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.get(
   }
 );
 
+app.post('/supply-form', generateSupplyForm);
 app.post('/', pdfReportGenerator);
 
 const authData = pb.admins
@@ -61,6 +63,7 @@ const authData = pb.admins
 const port = Number(process.env.PORT) || 8000;
 const ip = process.env.IP || '';
 
+// todo: create temp folder if non existent
 const filePath = path.join(process.cwd(), 'temp');
 const permissions = 0o644; // Octal representation of desired permissions
 
