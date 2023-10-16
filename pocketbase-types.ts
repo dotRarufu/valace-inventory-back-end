@@ -4,10 +4,14 @@
 
 export enum Collections {
 	Activity = "activity",
+	Borrow = "borrow",
 	Count = "count",
 	Item = "item",
-	Test = "test",
+	Request = "request",
+	Shipment = "shipment",
 	User = "user",
+	Utilizee = "utilizee",
+	Utilizer = "utilizer",
 }
 
 // Alias types for improved usability
@@ -67,6 +71,11 @@ export type ActivityRecord = {
 	edit_new_value?: string
 }
 
+export type BorrowRecord = {
+	item: RecordIdString
+	amount: number
+}
+
 export type CountRecord = {
 	table: string
 	count: number
@@ -82,18 +91,51 @@ export type ItemRecord = {
 	quantity?: number
 	location: string
 	supplier?: string
-	is_available?: boolean
 	remarks?: string
 	type: ItemTypeOptions
 	images?: string[]
 	property_number: string
 	serial_number: string
 	is_removed?: boolean
-	qr: string
+	qr?: string
+	total: number
 }
 
-export type TestRecord = {
-	field1?: string
+export enum RequestTagOptions {
+	"IT" = "IT",
+	"Office" = "Office",
+	"Ano pa" = "Ano pa",
+}
+
+export enum RequestStatusOptions {
+	"PENDING" = "PENDING",
+	"APPROVED" = "APPROVED",
+	"ANO PA" = "ANO PA",
+	"DECLINED" = "DECLINED",
+}
+export type RequestRecord = {
+	office: RecordIdString
+	item_name: string
+	amount: number
+	tag: RequestTagOptions
+	unit: string
+	description: string
+	status: RequestStatusOptions
+}
+
+export enum ShipmentTagOptions {
+	"IT" = "IT",
+	"OFFICE" = "OFFICE",
+	"FURNITURE" = "FURNITURE",
+}
+export type ShipmentRecord = {
+	item_name: string
+	expected_amount: number
+	tag: ShipmentTagOptions
+	unit: string
+	description?: string
+	office: RecordIdString
+	received_amount?: number
 }
 
 export type UserRecord = {
@@ -105,27 +147,52 @@ export type UserRecord = {
 	is_removed?: boolean
 }
 
+export type UtilizeeRecord = {
+	item: RecordIdString
+	office: RecordIdString
+	amount: number
+	note?: string
+}
+
+export type UtilizerRecord = {
+	borrow: RecordIdString
+	utilizer: RecordIdString
+	amoun_given?: number
+}
+
 // Response types include system fields and match responses from the PocketBase API
 export type ActivityResponse<Texpand = unknown> = Required<ActivityRecord> & BaseSystemFields<Texpand>
+export type BorrowResponse<Texpand = unknown> = Required<BorrowRecord> & BaseSystemFields<Texpand>
 export type CountResponse<Texpand = unknown> = Required<CountRecord> & BaseSystemFields<Texpand>
 export type ItemResponse<Texpand = unknown> = Required<ItemRecord> & BaseSystemFields<Texpand>
-export type TestResponse<Texpand = unknown> = Required<TestRecord> & BaseSystemFields<Texpand>
+export type RequestResponse<Texpand = unknown> = Required<RequestRecord> & BaseSystemFields<Texpand>
+export type ShipmentResponse<Texpand = unknown> = Required<ShipmentRecord> & BaseSystemFields<Texpand>
 export type UserResponse<Texpand = unknown> = Required<UserRecord> & AuthSystemFields<Texpand>
+export type UtilizeeResponse<Texpand = unknown> = Required<UtilizeeRecord> & BaseSystemFields<Texpand>
+export type UtilizerResponse<Texpand = unknown> = Required<UtilizerRecord> & BaseSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
 	activity: ActivityRecord
+	borrow: BorrowRecord
 	count: CountRecord
 	item: ItemRecord
-	test: TestRecord
+	request: RequestRecord
+	shipment: ShipmentRecord
 	user: UserRecord
+	utilizee: UtilizeeRecord
+	utilizer: UtilizerRecord
 }
 
 export type CollectionResponses = {
 	activity: ActivityResponse
+	borrow: BorrowResponse
 	count: CountResponse
 	item: ItemResponse
-	test: TestResponse
+	request: RequestResponse
+	shipment: ShipmentResponse
 	user: UserResponse
+	utilizee: UtilizeeResponse
+	utilizer: UtilizerResponse
 }

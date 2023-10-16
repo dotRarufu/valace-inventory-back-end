@@ -9,7 +9,7 @@ import cors from 'cors';
 import { cutoutGenerator } from './routes/cutoutGenerator.js';
 import fsPromises from 'fs/promises';
 import { exportToXlsx } from './routes/exportToXlsx.js';
-import { generateSupplyForm } from './routes/spreadsheet.js';
+import { generateSupplyForm } from './routes/supplyFormGenerator.js';
 
 const app = express();
 
@@ -35,6 +35,28 @@ app.get(
     // todo: handle non existing files
   }
 );
+app.get(
+  '/supply-form/:requestId',
+  (req: Request<{ requestId: string }>, res: Response) => {
+    const { requestId } = req.params;
+    const streamingPath = path.join(
+      process.cwd(),
+      'supply-form',
+      'generated',
+      `${requestId}`
+    );
+
+    res.download(streamingPath, err => {
+      if (err) {
+        console.log('Could not send file:', err);
+      }
+      fsPromises.unlink(streamingPath);
+    });
+
+    // todo: handle non existing files
+  }
+);
+
 app.get(
   '/to-xlsx/:requestId',
   (req: Request<{ requestId: string }>, res: Response) => {
