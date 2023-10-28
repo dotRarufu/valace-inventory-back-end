@@ -9,6 +9,7 @@ export enum Collections {
 	Item = "item",
 	Request = "request",
 	Shipment = "shipment",
+	ShipmentItem = "shipment_item",
 	User = "user",
 	Utilizee = "utilizee",
 	Utilizer = "utilizer",
@@ -61,19 +62,23 @@ export enum ActivityActionOptions {
 	"EDIT PROPERTY NUMBER" = "EDIT PROPERTY NUMBER",
 	"ADD ITEM IMAGE" = "ADD ITEM IMAGE",
 	"DELETE ITEM IMAGE" = "DELETE ITEM IMAGE",
+	"EDIT TOTAL" = "EDIT TOTAL",
+	"EDIT UNIT" = "EDIT UNIT",
 }
 export type ActivityRecord = {
 	user_id: RecordIdString
-	action: ActivityActionOptions
 	item_id?: RecordIdString
 	target_user_id?: RecordIdString
 	edit_old_value?: string
 	edit_new_value?: string
+	action: ActivityActionOptions
 }
 
 export type BorrowRecord = {
 	item: RecordIdString
 	amount: number
+	office: RecordIdString
+	location: string
 }
 
 export type CountRecord = {
@@ -89,7 +94,6 @@ export enum ItemTypeOptions {
 export type ItemRecord = {
 	name: string
 	quantity?: number
-	location: string
 	supplier?: string
 	remarks?: string
 	type: ItemTypeOptions
@@ -99,12 +103,13 @@ export type ItemRecord = {
 	is_removed?: boolean
 	qr?: string
 	total: number
+	unit: string
 }
 
 export enum RequestTagOptions {
 	"IT" = "IT",
-	"Office" = "Office",
-	"Ano pa" = "Ano pa",
+	"OFFICE" = "OFFICE",
+	"FURNITURE" = "FURNITURE",
 }
 
 export enum RequestStatusOptions {
@@ -123,41 +128,65 @@ export type RequestRecord = {
 	status: RequestStatusOptions
 }
 
-export enum ShipmentTagOptions {
-	"IT" = "IT",
-	"OFFICE" = "OFFICE",
-	"FURNITURE" = "FURNITURE",
+export enum ShipmentStatusOptions {
+	"WAITING" = "WAITING",
+	"COMPLETED" = "COMPLETED",
 }
 export type ShipmentRecord = {
-	item_name: string
-	expected_amount: number
-	tag: ShipmentTagOptions
-	unit: string
-	description?: string
-	office: RecordIdString
-	received_amount?: number
+	status: ShipmentStatusOptions
+	created_by: RecordIdString
+	month: string
 }
 
+export enum ShipmentItemTagOptions {
+	"Furniture" = "Furniture",
+	"IT" = "IT",
+	"Office" = "Office",
+}
+
+export enum ShipmentItemTypeOptions {
+	"RESTOCK" = "RESTOCK",
+	"REQUEST" = "REQUEST",
+}
+export type ShipmentItemRecord = {
+	item_name: string
+	expected_amount: number
+	tag: ShipmentItemTagOptions
+	unit: string
+	office: RecordIdString
+	received_amount?: number
+	shipment: RecordIdString
+	type: ShipmentItemTypeOptions
+	restock_item_id?: RecordIdString
+}
+
+export enum UserTypeOptions {
+	"ADMIN" = "ADMIN",
+	"STAFF" = "STAFF",
+	"OFFICE" = "OFFICE",
+	"OFFICER" = "OFFICER",
+}
 export type UserRecord = {
 	name?: string
 	avatar?: string
 	plain_password: string
 	is_active?: boolean
-	is_admin?: boolean
 	is_removed?: boolean
+	type: UserTypeOptions
 }
 
 export type UtilizeeRecord = {
 	item: RecordIdString
 	office: RecordIdString
 	amount: number
-	note?: string
+	location: string
 }
 
 export type UtilizerRecord = {
-	borrow: RecordIdString
 	utilizer: RecordIdString
 	amoun_given?: number
+	item: RecordIdString
+	utilizee: RecordIdString
 }
 
 // Response types include system fields and match responses from the PocketBase API
@@ -167,6 +196,7 @@ export type CountResponse<Texpand = unknown> = Required<CountRecord> & BaseSyste
 export type ItemResponse<Texpand = unknown> = Required<ItemRecord> & BaseSystemFields<Texpand>
 export type RequestResponse<Texpand = unknown> = Required<RequestRecord> & BaseSystemFields<Texpand>
 export type ShipmentResponse<Texpand = unknown> = Required<ShipmentRecord> & BaseSystemFields<Texpand>
+export type ShipmentItemResponse<Texpand = unknown> = Required<ShipmentItemRecord> & BaseSystemFields<Texpand>
 export type UserResponse<Texpand = unknown> = Required<UserRecord> & AuthSystemFields<Texpand>
 export type UtilizeeResponse<Texpand = unknown> = Required<UtilizeeRecord> & BaseSystemFields<Texpand>
 export type UtilizerResponse<Texpand = unknown> = Required<UtilizerRecord> & BaseSystemFields<Texpand>
@@ -180,6 +210,7 @@ export type CollectionRecords = {
 	item: ItemRecord
 	request: RequestRecord
 	shipment: ShipmentRecord
+	shipment_item: ShipmentItemRecord
 	user: UserRecord
 	utilizee: UtilizeeRecord
 	utilizer: UtilizerRecord
@@ -192,6 +223,7 @@ export type CollectionResponses = {
 	item: ItemResponse
 	request: RequestResponse
 	shipment: ShipmentResponse
+	shipment_item: ShipmentItemResponse
 	user: UserResponse
 	utilizee: UtilizeeResponse
 	utilizer: UtilizerResponse

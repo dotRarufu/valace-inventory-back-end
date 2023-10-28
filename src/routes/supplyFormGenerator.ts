@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import { getItem } from '../services/item.js';
-import { getRequest } from '../services/request.js';
+import { getOfficeData, getRequest } from '../services/request.js';
 
 const sampledData = [
   [
@@ -85,8 +85,9 @@ export const generateSupplyForm = async (
     const requestsData = await Promise.all(
       requests.map(async r => {
         const item = await getRequest(r.id);
+        const officeData = await getOfficeData(r.requestedBy);
 
-        return { ...item, requestedBy: r.requestedBy };
+        return { ...item, requestedBy: officeData.name || officeData.username };
       })
     );
 
@@ -98,37 +99,37 @@ export const generateSupplyForm = async (
 
     // Insert data
     const requestRows = requestsData.map(
-      ({ item_name, description, requestedBy, amount, unit }) => [
-        'item #',
+      ({ item_name, description, requestedBy, amount, unit }, index) => [
+        (index + 1).toString(),
         item_name,
         description,
         requestedBy,
         amount,
         unit,
         '',
-        'ano to',
-        'loc',
         '',
         '',
-        'wip cost',
+        '',
+        '',
+        '',
         '',
         '',
       ]
     );
     const restockRows = restocksData.map(
-      ({ name, remarks, total, amount, location, supplier }) => [
-        'item #',
+      ({ name, remarks, total, amount, unit, supplier }, index) => [
+        (index + 1).toString(),
         name,
         remarks,
         'ValAce',
         total,
-        'unit',
+        unit,
         amount,
-        'ano to',
-        location,
         '',
         '',
-        'wip cost',
+        '',
+        '',
+        '',
         supplier,
         '',
       ]
