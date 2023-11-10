@@ -6,9 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "npx tsc",
-    "start": "NODE_ENV='PROD' node dist/src/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\"",
-    "generate-types": "npx pocketbase-typegen --db ../pocketbase/pb_data/data.db --out pocketbase-types.ts"
+    "start": "node dist/src/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\""
   },
   "author": "Ralph Coleco",
   "license": "ISC",
