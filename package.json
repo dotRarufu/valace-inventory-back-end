@@ -5,6 +5,7 @@
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
+    "pb": "./tools/start-pb.sh",
     "build": "npx tsc",
     "start": "node dist/src/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\""

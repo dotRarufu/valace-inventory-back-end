@@ -4,11 +4,14 @@
 
 <h2>🔨 Installation</h2>
 
-<p>Install packages</p>
+<p>1. Install packages</p>
 
 ```
 npm install
 ```
+
+<p>2. Download <a href="https://github.com/pocketbase/pocketbase/releases">PocketBase v0.16.7 or up </a></p>
+<p>Put it in <code>pocketbase</code> folder</p>
 
 <h2>⚙️ Setup</h2>
 
@@ -34,6 +37,12 @@ npm run build
 
 ```
 npm run start
+```
+
+<p>3. Start Pocketbase instance</p>
+
+```
+npm run pb
 ```
 
 <h2>💻 Built with</h2>

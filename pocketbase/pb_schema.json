@@ -1,0 +1,920 @@
+[
+  {
+    "id": "baafwbd0umhxkff",
+    "name": "count",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "zy5iqxwd",
+        "name": "table",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "nsitd0zv",
+        "name": "count",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX `idx_0gcKnyQ` ON `count` (`table`)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": null,
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "d1xczni8343ghlc",
+    "name": "shipment",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "ztisxdpg",
+        "name": "status",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "WAITING",
+            "COMPLETED"
+          ]
+        }
+      },
+      {
+        "id": "bavwj6ht",
+        "name": "created_by",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "xi900mou",
+        "name": "month",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "c3fis9lbhnh917u",
+    "name": "request",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "qhmk0n6n",
+        "name": "office",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "s6dxgjaa",
+        "name": "item_name",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "4hqe1ykz",
+        "name": "amount",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "se90qfev",
+        "name": "tag",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "IT",
+            "OFFICE",
+            "FURNITURE"
+          ]
+        }
+      },
+      {
+        "id": "wz0wu9kv",
+        "name": "unit",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "wqal8jsy",
+        "name": "description",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "oajtamzz",
+        "name": "status",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "PENDING",
+            "APPROVED",
+            "ANO PA",
+            "DECLINED"
+          ]
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "kjegax8qd3p9alt",
+    "name": "shipment_item",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "tqh3gkki",
+        "name": "item_name",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "ujiyhv18",
+        "name": "expected_amount",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "yyjqre7q",
+        "name": "tag",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "Furniture",
+            "IT",
+            "Office"
+          ]
+        }
+      },
+      {
+        "id": "jhvbuz30",
+        "name": "unit",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "flayomcl",
+        "name": "office",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "ri03hojl",
+        "name": "received_amount",
+        "type": "number",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "tofcvxey",
+        "name": "shipment",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "d1xczni8343ghlc",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "s7zgnezb",
+        "name": "type",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "RESTOCK",
+            "REQUEST"
+          ]
+        }
+      },
+      {
+        "id": "gfpsmcsn",
+        "name": "restock_item_id",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "options": {
+          "collectionId": "jbwoh86vd4eslzc",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "gn2iuuyyldfcuxg",
+    "name": "borrow",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "yhrk6mfr",
+        "name": "item",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "jbwoh86vd4eslzc",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "lhloluye",
+        "name": "amount",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "cwny49xg",
+        "name": "office",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "nauuxhtd",
+        "name": "location",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "ulkv8rmz4tgp906",
+    "name": "utilizee",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "aih9ygip",
+        "name": "item",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "jbwoh86vd4eslzc",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "tvh6vkv0",
+        "name": "office",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "c8alf1no",
+        "name": "amount",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "gxkwkwhj",
+        "name": "location",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "l3u03rx7eyryxc8",
+    "name": "utilizer",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "y4bethdz",
+        "name": "utilizer",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "9fu6obuh",
+        "name": "amoun_given",
+        "type": "number",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "atwevjvn",
+        "name": "item",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "jbwoh86vd4eslzc",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "qofzbz3c",
+        "name": "utilizee",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "ulkv8rmz4tgp906",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "_pb_users_auth_",
+    "name": "user",
+    "type": "auth",
+    "system": false,
+    "schema": [
+      {
+        "id": "users_name",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "users_avatar",
+        "name": "avatar",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 3242880,
+          "mimeTypes": [
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/gif",
+            "image/webp"
+          ],
+          "thumbs": null,
+          "protected": false
+        }
+      },
+      {
+        "id": "jn4sjteu",
+        "name": "plain_password",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "vct5cq1s",
+        "name": "is_active",
+        "type": "bool",
+        "system": false,
+        "required": false,
+        "options": {}
+      },
+      {
+        "id": "xfhuqje2",
+        "name": "is_removed",
+        "type": "bool",
+        "system": false,
+        "required": false,
+        "options": {}
+      },
+      {
+        "id": "ifypzkt5",
+        "name": "type",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "ADMIN",
+            "STAFF",
+            "OFFICE",
+            "OFFICER"
+          ]
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "@request.auth.type = \"ADMIN\"",
+    "viewRule": "",
+    "createRule": "@request.auth.type = \"ADMIN\"",
+    "updateRule": "@request.auth.type = \"ADMIN\"",
+    "deleteRule": "@request.auth.type = \"ADMIN\"",
+    "options": {
+      "allowEmailAuth": true,
+      "allowOAuth2Auth": true,
+      "allowUsernameAuth": true,
+      "exceptEmailDomains": null,
+      "manageRule": null,
+      "minPasswordLength": 8,
+      "onlyEmailDomains": null,
+      "requireEmail": false
+    }
+  },
+  {
+    "id": "jbwoh86vd4eslzc",
+    "name": "item",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "ysbh7snb",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "scjrfqd7",
+        "name": "quantity",
+        "type": "number",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "9afib7fy",
+        "name": "supplier",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "lvtoicsk",
+        "name": "remarks",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "uk6jgkvz",
+        "name": "type",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "Furniture",
+            "IT",
+            "Office"
+          ]
+        }
+      },
+      {
+        "id": "rf9kv6f7",
+        "name": "images",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "options": {
+          "maxSelect": 99,
+          "maxSize": 5242880,
+          "mimeTypes": [],
+          "thumbs": [],
+          "protected": false
+        }
+      },
+      {
+        "id": "jeflqfk0",
+        "name": "property_number",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "kqyffu6z",
+        "name": "serial_number",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "dsm41emk",
+        "name": "is_removed",
+        "type": "bool",
+        "system": false,
+        "required": false,
+        "options": {}
+      },
+      {
+        "id": "qkgtz3zh",
+        "name": "qr",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "mimeTypes": [],
+          "thumbs": [],
+          "protected": false
+        }
+      },
+      {
+        "id": "b0xowifc",
+        "name": "total",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "vvtosnjk",
+        "name": "unit",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX `idx_pciw3Pm` ON `item` (\n  `name`,\n  `remarks`\n)",
+      "CREATE UNIQUE INDEX `idx_jwHAjVm` ON `item` (`serial_number`)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\"",
+    "options": {}
+  },
+  {
+    "id": "41w2iinrjnlhg8k",
+    "name": "activity",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "qmpxoqr6",
+        "name": "user_id",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": [
+            "id"
+          ]
+        }
+      },
+      {
+        "id": "leyrskec",
+        "name": "item_id",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "options": {
+          "collectionId": "jbwoh86vd4eslzc",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": [
+            "id"
+          ]
+        }
+      },
+      {
+        "id": "diygkvjx",
+        "name": "target_user_id",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "e4lgatew",
+        "name": "edit_old_value",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "bcqyw1cr",
+        "name": "edit_new_value",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "psat6lci",
+        "name": "action",
+        "type": "select",
+        "system": false,
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "ADD ITEM",
+            "ADD ACCOUNT",
+            "ADD ITEM THROUGH CSV",
+            "DELETE ITEM",
+            "DELETE ACCOUNT",
+            "DOWNLOAD QR",
+            "LOGIN",
+            "LOGOUT",
+            "EDIT NAME",
+            "EDIT QUANTITY",
+            "EDIT LOCATION",
+            "EDIT SUPPLIER",
+            "EDIT REMARKS",
+            "EDIT TYPE",
+            "EDIT IMAGES",
+            "EDIT ACCOUNT USERNAME",
+            "EDIT ACCOUNT ROLE",
+            "EDIT ACCOUNT PASSWORD",
+            "EDIT ACCOUNT STATUS",
+            "EDIT PROPERTY NUMBER",
+            "ADD ITEM IMAGE",
+            "DELETE ITEM IMAGE",
+            "EDIT TOTAL",
+            "EDIT UNIT"
+          ]
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  }
+]

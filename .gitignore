@@ -1,5 +1,7 @@
 cutouts
 supply-form/generated
+pocketbase/*
+!pocketbase/pb_schema.json
 
 # Logs
 logs
