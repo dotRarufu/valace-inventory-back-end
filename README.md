@@ -17,13 +17,13 @@ npm install
 
 <p>Create <code>.env</code> file in root with these:</p>
 
-| Keys               | Example                   | Description                         |
-| ------------------ | ------------------------- | ----------------------------------- |
-| POCKETBASE_ADDRESS | http://170.10.31.175:8090 | Address of pocketbase instance      |
-| IP                 | 172.17.0.1                | IP to be used by client-side app    |
-| PORT               | 3002                      | Port to be used by client-side app  |
-| ADMIN_EMAIL        | admin1@email.com          | Admin email for generating types    |
-| ADMIN_PASSWORD     | admin1password            | Admin password for generating types |
+| Keys               | Example            | Description                         |
+| ------------------ | ------------------ | ----------------------------------- |
+| POCKETBASE_ADDRESS | 170.10.31.175:8090 | Address of pocketbase instance      |
+| IP                 | 172.17.0.1         | IP to be used by client-side app    |
+| PORT               | 3002               | Port to be used by client-side app  |
+| ADMIN_EMAIL        | admin1@email.com   | Admin email for generating types    |
+| ADMIN_PASSWORD     | admin1password     | Admin password for generating types |
 
 <h2>🏃 Run</h2>
 
