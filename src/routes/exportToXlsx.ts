@@ -16,6 +16,7 @@ export const exportToXlsx = async (
   const ids = req.body.ids;
   console.log('to xlsx | ids:', ids);
   // Get ids data
+
   const reqs = ids.map(
     async id => await pb.collection(Collections.Item).getOne<ItemResponse>(id)
   );
