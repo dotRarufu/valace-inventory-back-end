@@ -26,7 +26,6 @@ export const exportToXlsx = async (
     ({
       name,
       quantity,
-      location,
       supplier,
       remarks,
       type,
@@ -35,7 +34,6 @@ export const exportToXlsx = async (
     }) => ({
       name,
       quantity,
-      location,
       supplier,
       remarks,
       type,
