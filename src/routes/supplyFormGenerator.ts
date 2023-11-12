@@ -100,7 +100,7 @@ export const generateSupplyForm = async (
     // Insert data
     const requestRows = requestsData.map(
       ({ item_name, description, requestedBy, amount, unit }, index) => [
-        (index + 1).toString(),
+        // (index + 1).toString(),
         item_name,
         description,
         requestedBy,
@@ -130,7 +130,7 @@ export const generateSupplyForm = async (
         },
         index
       ) => [
-        (index + 1).toString(),
+        // (index + 1).toString(),
         name,
         remarks,
         'ValAce',
@@ -148,8 +148,11 @@ export const generateSupplyForm = async (
       ]
     );
     const data = [...restockRows, ...requestRows];
+    const numberedData = data
+      .map((d, index) => [(index + 1).toString(), ...d])
+      .reverse();
 
-    data.map(d => sheet1.insertRow(dataStartRow, d, 'o'));
+    numberedData.map(d => sheet1.insertRow(dataStartRow, d, 'o'));
 
     // Style
     const spreadsheetRange = generateSpreadsheetRange('A5', 'N7');
