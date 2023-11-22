@@ -77,8 +77,11 @@ app.get(
 app.post('/supply-form', generateSupplyForm);
 app.post('/', pdfReportGenerator);
 
+const email = process.env.ADMIN_EMAIL;
+const password = process.env.ADMIN_PASSWORD;
+
 const authData = pb.admins
-  .authWithPassword('admin1@email.com', 'admin1password')
+  .authWithPassword(email, password)
   .then(a => console.log('Successfully authenticated'))
   .catch(a => console.log('Authentication failed'));
 
