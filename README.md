@@ -7,7 +7,7 @@
 <p>1. Install packages</p>
 
 ```
-npm install
+npm install --force
 ```
 
 <p>2. Download <a href="https://github.com/pocketbase/pocketbase/releases">PocketBase v0.16.7 or up </a></p>
@@ -15,31 +15,42 @@ npm install
 
 <h2>⚙️ Setup</h2>
 
-<p>Create <code>.env</code> file in root with these:</p>
+<p>1. Create <code>.env</code> file in root with these:</p>
 
-| Keys               | Example                                              | Description                         |
+| Key                | Example                                              | Description                         |
 | ------------------ | ---------------------------------------------------- | ----------------------------------- |
-| POCKETBASE_ADDRESS | http://192.168.1.8:8090                              | Address of pocketbase instance      |
-| IP                 | 172.17.0.1                                           | IP to be used by client-side app    |
-| PORT               | 3002                                                 | Port to be used by client-side app  |
-| ADMIN_EMAIL        | <div style="display: inline">admin1@email.com </div> | Admin email for generating types    |
-| ADMIN_PASSWORD     | admin1password                                       | Admin password for generating types |
+| POCKETBASE_ADDRESS | 192.168.1.8:8090                                     | Address of pocketbase instance      |
+| IP                 | 172.17.0.1                                           | IP to be used by back-end app    |
+| PORT               | 3002                                                 | Port to be used by back-end app  |
 
-<h2>🏃 Run</h2>
-
-<p>1. Start Pocketbase instance</p>
+<p>2. Start Pocketbase instance</p>
 
 ```
 npm run pb
 ```
 
-<p>2. Build</p>
+<p>3. Setup Pocketbase </p>
+<p>a. In you browser, go to <code>{POCKETBASE_ADDRESS}/_</code> and setup an admin account</p>
+<p>b. Load <code>pocketbase/pb_schema.json</code> in <code>Settings > Import collections </code> </p>
+
+<p>4. Update environmental variables </p>
+
+| Key                | Example                                              | Description                                                    |
+| ------------------ | ---------------------------------------------------- | -------------------------------------------------------------- |
+| ADMIN_EMAIL        | <div style="display: inline">admin1@email.com </div> | Admin email for generating types and service authentication    |
+| ADMIN_PASSWORD     | admin1password                                       | Admin password for generating types and service authentication |
+
+<p>Put these variables in <code>.env</code></p>
+
+<h2>🏃 Run</h2>
+
+<p>1. Build</p>
 
 ```
 npm run build
 ```
 
-<p>3. Run</p>
+<p>2. Run</p>
 
 ```
 npm run start
