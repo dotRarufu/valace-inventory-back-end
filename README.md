@@ -35,11 +35,10 @@ npm run pb
 
 <p>4. Update environmental variables </p>
 
-| Key                | Example          | Description                     |
-| ------------------ | ---------------- | ------------------------------- |
-| POCKETBASE_ADDRESS | 192.168.1.8:8090 | Address of pocketbase instance  |
-| IP                 | 172.17.0.1       | IP to be used by back-end app   |
-| PORT               | 3002             | Port to be used by back-end app |
+| Key                | Example                                              | Description                                                    |
+| ------------------ | ---------------------------------------------------- | -------------------------------------------------------------- |
+| ADMIN_EMAIL        | <div style="display: inline">admin1@email.com </div> | Admin email for generating types and service authentication    |
+| ADMIN_PASSWORD     | admin1password                                       | Admin password for generating types and service authentication |
 
 <p>Put these variables in <code>.env</code></p>
 
